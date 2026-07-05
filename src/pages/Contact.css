@@ -1,0 +1,311 @@
+/* ════════════════════════════════════════════════
+   CONTACT PAGE — Noor Layers
+══════════════════════════════════════════════════ */
+.nl-contact-page {
+  background: var(--nl-bg);
+  min-height: 100vh;
+  padding: 2rem 0 5rem;
+}
+
+/* Breadcrumb */
+.nl-contact-page .nl-breadcrumb {
+  margin-bottom: 1.5rem;
+}
+.nl-contact-page .nl-breadcrumb ol {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: .85rem;
+}
+.nl-contact-page .nl-breadcrumb li:not(:last-child)::after {
+  content: "›";
+  margin-left: .5rem;
+  color: var(--nl-muted);
+}
+.nl-contact-page .nl-breadcrumb a {
+  color: var(--nl-muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nl-contact-page .nl-breadcrumb a:hover {
+  color: var(--nl-orange);
+}
+.nl-contact-page .nl-breadcrumb .active {
+  color: var(--nl-black);
+  font-weight: 500;
+}
+
+.nl-contact-intro {
+  color: var(--nl-muted);
+  font-size: 1rem;
+  max-width: 600px;
+  line-height: 1.6;
+  margin: 0 0 2rem;
+}
+
+/* ═══ CONTACT CARDS ═══ */
+.nl-contact-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.nl-contact-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: #fff;
+  border: 1px solid var(--nl-border);
+  border-radius: 14px;
+  transition: all .25s ease;
+}
+
+.nl-contact-card:hover {
+  transform: translateX(4px);
+  border-color: var(--nl-orange-line);
+  box-shadow: 0 8px 24px rgba(0,0,0,.05);
+}
+
+.nl-contact-card__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--nl-orange-soft);
+  border: 1.5px solid var(--nl-orange-line);
+  color: var(--nl-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all .25s;
+}
+
+.nl-contact-card:hover .nl-contact-card__icon {
+  background: var(--nl-orange);
+  color: #fff;
+}
+
+.nl-contact-card__label {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--nl-muted);
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  margin-bottom: .25rem;
+}
+
+.nl-contact-card__value {
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--nl-black);
+  text-decoration: none;
+  transition: color .2s;
+}
+
+a.nl-contact-card__value:hover {
+  color: var(--nl-orange);
+}
+
+/* ═══ SOCIAL LINKS ═══ */
+.nl-contact-social {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--nl-border);
+}
+.nl-contact-social > span {
+  font-size: .85rem;
+  color: var(--nl-muted);
+  font-weight: 500;
+}
+.nl-contact-social__icons {
+  display: flex;
+  gap: .5rem;
+}
+.nl-soc-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--nl-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--nl-muted);
+  transition: all .2s;
+}
+.nl-soc-icon:hover {
+  border-color: var(--nl-orange);
+  color: var(--nl-orange);
+  background: var(--nl-orange-soft);
+  transform: translateY(-2px);
+}
+
+/* ═══ MESSAGE FORM CARD ═══ */
+.nl-message-card {
+  background: #fff;
+  border: 1px solid var(--nl-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.nl-message-card::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(232,146,10,.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.nl-message-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--nl-black);
+  margin: 0 0 .5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.nl-message-sub {
+  color: var(--nl-muted);
+  font-size: .92rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.nl-message-form {
+  position: relative;
+  z-index: 1;
+}
+
+.nl-form-label {
+  display: block;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--nl-black);
+  margin-bottom: .5rem;
+  letter-spacing: .04em;
+}
+
+.nl-form-input {
+  width: 100%;
+  border: 1.5px solid var(--nl-border);
+  border-radius: 10px;
+  padding: .85rem 1rem;
+  font-size: .95rem;
+  color: var(--nl-black);
+  background: #fff;
+  transition: all .2s;
+  font-family: inherit;
+}
+
+.nl-form-input:focus {
+  outline: none;
+  border-color: var(--nl-orange);
+  box-shadow: 0 0 0 3px var(--nl-orange-soft);
+}
+
+.nl-form-input::placeholder {
+  color: var(--nl-muted);
+  opacity: .6;
+}
+
+.nl-form-textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.nl-btn-send {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 1rem !important;
+  font-size: .95rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .6rem !important;
+}
+
+.nl-btn-send:disabled {
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.nl-spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255,255,255,.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success State */
+.nl-message-success {
+  text-align: center;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.nl-success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(46, 204, 113, .1);
+  color: #2ECC71;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  animation: pop .4s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(.5); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.nl-message-success h4 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5rem;
+  color: var(--nl-black);
+  margin-bottom: .5rem;
+}
+
+.nl-message-success p {
+  color: var(--nl-muted);
+  margin: 0;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 768px) {
+  .nl-contact-page {
+    padding: 1rem 0 3rem;
+  }
+  .nl-message-card {
+    padding: 1.75rem;
+  }
+  .nl-contact-card {
+    padding: 1rem;
+  }
+}

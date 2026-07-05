@@ -1,0 +1,62 @@
+.pc { cursor:pointer; transition:transform .3s; }
+.pc:hover { transform:translateY(-4px); }
+.pc__img { position:relative; border-radius:14px; overflow:hidden; aspect-ratio:3/4; background:#EDE8DE; margin-bottom:.85rem; }
+.pc__img img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .45s; }
+.pc:hover .pc__img img { transform:scale(1.04); }
+.pc__ph { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+.pc__ph span { font-family:'Cormorant Garamond',serif; font-size:2.5rem; color:rgba(232,146,10,.25); }
+.pc__overlay { position:absolute; inset:0; background:rgba(0,0,0,.38); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.55rem; opacity:0; transition:opacity .3s; padding:.75rem; }
+.pc:hover .pc__overlay { opacity:1; }
+.pc__add { background:#E8920A; color:#fff; border:none; padding:.6rem 1.2rem; border-radius:8px; font-family:'Jost',sans-serif; font-size:.8rem; font-weight:600; cursor:pointer; width:100%; max-width:170px; transition:background .3s; }
+.pc__add:hover { background:#F5A623; }
+.pc__view { background:transparent; color:#fff; border:1px solid rgba(255,255,255,.55); padding:.55rem 1.2rem; border-radius:8px; font-family:'Jost',sans-serif; font-size:.8rem; cursor:pointer; width:100%; max-width:170px; transition:all .3s; }
+.pc__view:hover { border-color:#E8920A; color:#E8920A; }
+.pc__badge { position:absolute; top:10px; left:10px; background:#E8920A; color:#fff; font-size:.62rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:.2rem .5rem; border-radius:4px; }
+.pc__cat { display:block; font-size:.66rem; letter-spacing:2px; text-transform:uppercase; color:#B8A48A; margin-bottom:.2rem; }
+.pc__name { font-family:'Jost',sans-serif; font-size:.9rem; font-weight:500; color:#1A1208; margin-bottom:.3rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.pc__price { font-family:'Cormorant Garamond',serif; font-size:1.05rem; color:#E8920A; font-weight:600; }
+
+.pc__badge--sale {
+  background: #e53e3e;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.pc__prices {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pc__price--final {
+  color: #e53e3e;
+  font-weight: 700;
+}
+
+.pc__price--original {
+  color: #999;
+  text-decoration: line-through;
+  font-size: 0.85em;
+}
+.pc__no-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  background: #f3f4f6;
+  color: #9ca3af;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.pc__no-image svg {
+  opacity: 0.4;
+}

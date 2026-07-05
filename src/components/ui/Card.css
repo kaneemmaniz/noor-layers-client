@@ -1,0 +1,13 @@
+.nl-card {
+  background: #232323;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  padding: 1.5em;
+  color: #FFD580;
+  margin-bottom: 2em;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.nl-card:hover {
+  box-shadow: 0 4px 24px rgba(255,165,0,0.12);
+  transform: translateY(-2px) scale(1.01);
+}

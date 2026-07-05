@@ -1,0 +1,428 @@
+/* ════════════════════════════════════════════════
+   ABOUT PAGE — Noor Layers
+══════════════════════════════════════════════════ */
+.nl-about-page {
+  background: var(--nl-bg);
+  min-height: 100vh;
+  padding: 2rem 0 5rem;
+}
+
+/* Breadcrumb */
+.nl-about-page .nl-breadcrumb {
+  margin-bottom: 1rem;
+}
+.nl-about-page .nl-breadcrumb ol {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: .85rem;
+}
+.nl-about-page .nl-breadcrumb li:not(:last-child)::after {
+  content: "›";
+  margin-left: .5rem;
+  color: var(--nl-muted);
+}
+.nl-about-page .nl-breadcrumb a {
+  color: var(--nl-muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nl-about-page .nl-breadcrumb a:hover {
+  color: var(--nl-orange);
+}
+.nl-about-page .nl-breadcrumb .active {
+  color: var(--nl-black);
+  font-weight: 500;
+}
+
+/* ═══ STORY SECTION ═══ */
+.nl-about-story {
+  padding: 3rem 0 5rem;
+}
+
+.nl-about-heading {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 600;
+  color: var(--nl-black);
+  line-height: 1.1;
+  margin: 1rem 0 1.5rem;
+  letter-spacing: -0.5px;
+}
+.nl-about-heading em {
+  color: var(--nl-orange);
+  font-style: italic;
+}
+
+.nl-about-text {
+  color: var(--nl-muted);
+  font-size: .98rem;
+  line-height: 1.8;
+}
+.nl-about-text p {
+  margin-bottom: 1rem;
+}
+
+/* ═══ ABOUT IMAGE (Arch with halo) ═══ */
+.nl-about-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.nl-about-image__halo {
+  position: absolute;
+  width: 90%;
+  height: 95%;
+  top: 5%;
+  left: 5%;
+  background: radial-gradient(ellipse at 50% 40%, rgba(255,240,210,.95) 0%, rgba(250,235,200,.5) 35%, transparent 70%);
+  filter: blur(20px);
+  z-index: 0;
+}
+
+.nl-about-image__frame {
+  position: relative;
+  width: 380px;
+  height: 540px;
+  border-radius: 190px 190px 0 0;
+  overflow: hidden;
+  z-index: 1;
+}
+.nl-about-image__frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 190px 190px 0 0;
+  border: 1.5px solid rgba(232,146,10,.45);
+  box-shadow:
+    inset 0 0 0 8px rgba(255,255,255,.4),
+    0 0 50px rgba(232,146,10,.12);
+  z-index: 2;
+  pointer-events: none;
+}
+.nl-about-image__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.nl-about-image__leaf {
+  position: absolute;
+  right: -20px;
+  bottom: 50px;
+  z-index: 0;
+  opacity: .7;
+}
+
+/* ═══ VALUES SECTION ═══ */
+.nl-values {
+  padding: 4rem 0;
+  border-top: 1px solid var(--nl-border);
+}
+
+.nl-values-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.nl-value-card {
+  background: #fff;
+  border: 1px solid var(--nl-border);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all .3s ease;
+  transition-delay: var(--delay, 0ms);
+  box-shadow: 0 4px 14px rgba(0,0,0,.03);
+  position: relative;
+  overflow: hidden;
+}
+
+.nl-value-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--nl-orange), transparent);
+  transform: scaleX(0);
+  transition: transform .4s ease;
+}
+
+.nl-value-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--nl-orange-line);
+  box-shadow: 0 16px 36px rgba(0,0,0,.08);
+}
+
+.nl-value-card:hover::before {
+  transform: scaleX(1);
+}
+
+.nl-value-card__icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--nl-orange-soft);
+  border: 1.5px solid var(--nl-orange-line);
+  color: var(--nl-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+  transition: transform .3s, background .3s;
+}
+
+.nl-value-card:hover .nl-value-card__icon {
+  transform: scale(1.08);
+  background: var(--nl-orange);
+  color: #fff;
+}
+
+.nl-value-card__title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--nl-black);
+  margin: 0 0 .75rem;
+}
+
+.nl-value-card__desc {
+  color: var(--nl-muted);
+  font-size: .88rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ═══ MILESTONES SECTION ═══ */
+.nl-milestones {
+  padding: 4rem 0;
+}
+
+.nl-milestones-card {
+  background: linear-gradient(135deg, #fff 0%, var(--nl-bg-cool, #F5F1E8) 100%);
+  border: 1px solid var(--nl-border);
+  border-radius: 24px;
+  padding: 3.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.nl-milestones-card::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(232,146,10,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.nl-milestones-text {
+  position: relative;
+  z-index: 1;
+}
+
+.nl-milestones-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.nl-milestone {
+  background: #fff;
+  border: 1px solid var(--nl-border);
+  border-radius: 14px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: all .25s ease;
+}
+
+.nl-milestone:hover {
+  transform: translateY(-3px);
+  border-color: var(--nl-orange-line);
+  box-shadow: 0 12px 28px rgba(0,0,0,.06);
+}
+
+.nl-milestone__year {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--nl-orange);
+  line-height: 1;
+  margin-bottom: .5rem;
+}
+
+.nl-milestone__label {
+  font-size: .82rem;
+  color: var(--nl-muted);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ═══ CTA SECTION ═══ */
+.nl-about-cta {
+  padding: 3rem 0;
+}
+
+.nl-cta-card {
+  background: #fff;
+  border: 1px solid var(--nl-border);
+  border-radius: 24px;
+  padding: 4rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,.04);
+}
+
+.nl-cta-card::before,
+.nl-cta-card::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,146,10,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.nl-cta-card::before {
+  top: -125px;
+  left: -125px;
+}
+.nl-cta-card::after {
+  bottom: -125px;
+  right: -125px;
+}
+
+.nl-cta-card .nl-h2 {
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.nl-cta-card p {
+  color: var(--nl-muted);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.nl-cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══ REVEAL ANIMATIONS ═══ */
+.nl-out {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all .65s ease;
+}
+.nl-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all .65s ease;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 991px) {
+  .nl-about-image__frame {
+    width: 320px;
+    height: 460px;
+    border-radius: 160px 160px 0 0;
+  }
+  .nl-about-image__frame::before {
+    border-radius: 160px 160px 0 0;
+  }
+  .nl-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .nl-milestones-card {
+    grid-template-columns: 1fr;
+    padding: 2.5rem 2rem;
+    gap: 2rem;
+    text-align: center;
+  }
+  .nl-milestones-text .nl-eyebrow__divider {
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .nl-about-page {
+    padding: 1rem 0 3rem;
+  }
+  .nl-about-story {
+    padding: 2rem 0 3rem;
+  }
+  .nl-about-heading {
+    text-align: center;
+  }
+  .nl-about-text {
+    text-align: center;
+  }
+  .nl-about-image__leaf {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .nl-about-image__frame {
+    width: 260px;
+    height: 380px;
+    border-radius: 130px 130px 0 0;
+  }
+  .nl-about-image__frame::before {
+    border-radius: 130px 130px 0 0;
+  }
+  .nl-values-grid {
+    grid-template-columns: 1fr;
+  }
+  .nl-value-card {
+    padding: 1.75rem 1.25rem;
+  }
+  .nl-milestones-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .nl-milestone {
+    padding: 1.25rem .75rem;
+  }
+  .nl-milestone__year {
+    font-size: 1.6rem;
+  }
+  .nl-cta-card {
+    padding: 3rem 1.5rem;
+  }
+  .nl-cta-buttons {
+    flex-direction: column;
+  }
+  .nl-cta-buttons .btn {
+    width: 100%;
+  }
+}

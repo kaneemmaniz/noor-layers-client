@@ -1,0 +1,315 @@
+/* ══════════════════════════════
+   PRODUCTS LISTING PAGE
+══════════════════════════════ */
+
+.plp {
+  background: #faf7f2;
+  min-height: 80vh;
+  padding-bottom: 4rem;
+}
+
+/* Breadcrumb */
+.plp__breadcrumb {
+  background: #fff;
+  border-bottom: 1px solid #ede8de;
+  padding: 0.6rem 0;
+  font-size: 0.8rem;
+  color: #8B7355;
+  margin-bottom: 0;
+}
+
+.plp__breadcrumb nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.plp__breadcrumb a {
+  color: #8B7355;
+  text-decoration: none;
+}
+.plp__breadcrumb a:hover { color: #E8920A; }
+.plp__breadcrumb span:last-child { color: #1A1208; font-weight: 500; }
+
+/* Page title */
+.plp__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #1A1208;
+  margin: 1.5rem 0 0.25rem;
+}
+
+.plp__sub {
+  color: #8B7355;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Layout: sidebar + main */
+.plp__layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ── Sidebar ── */
+.plp__sidebar {
+  background: #fff;
+  border: 1px solid #ede8de;
+  border-radius: 12px;
+  padding: 1.25rem;
+  position: sticky;
+  top: 80px;
+}
+
+.plp__sidebar-section { margin-bottom: 1.5rem; }
+.plp__sidebar-section:last-child { margin-bottom: 0; }
+
+.plp__sidebar-heading {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1A1208;
+  margin-bottom: 0.85rem;
+}
+
+.plp__cat-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.plp__cat-btn {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.87rem;
+  color: #5a4a3a;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.plp__cat-btn:hover { background: #fdf3e3; color: #E8920A; }
+.plp__cat-btn.active {
+  color: #E8920A;
+  font-weight: 600;
+  background: #fdf3e3;
+}
+
+/* Price range */
+.plp__range {
+  width: 100%;
+  accent-color: #E8920A;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.plp__range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #8B7355;
+}
+
+/* ── Main ── */
+.plp__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.plp__count {
+  font-size: 0.83rem;
+  color: #8B7355;
+}
+
+.plp__sort {
+  border: 1px solid #e0d5c5;
+  border-radius: 6px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.83rem;
+  color: #1A1208;
+  background: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  outline: none;
+}
+.plp__sort:focus { border-color: #E8920A; }
+
+/* Grid */
+.plp__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+/* Skeleton */
+.plp__skel {
+  aspect-ratio: 3/4;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #f0ebe3 25%, #e8e0d5 50%, #f0ebe3 75%);
+  background-size: 300% 100%;
+  animation: plp-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes plp-shimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* Empty */
+.plp__empty {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: #8B7355;
+}
+.plp__empty span { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; }
+.plp__empty p { margin-bottom: 1rem; }
+.plp__empty button {
+  background: #E8920A;
+  color: #fff;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
+/* Pagination */
+.plp__pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-top: 2.5rem;
+}
+
+.plp__pg {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e0d5c5;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: #5a4a3a;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.plp__pg.active {
+  background: #E8920A;
+  border-color: #E8920A;
+  color: #fff;
+  font-weight: 600;
+}
+
+.plp__pg:hover:not(:disabled):not(.active) {
+  border-color: #E8920A;
+  color: #E8920A;
+}
+
+.plp__pg:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .plp__layout { grid-template-columns: 1fr; }
+  .plp__sidebar { position: static; }
+}
+
+@media (max-width: 600px) {
+  .plp__grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .plp__title { font-size: 1.5rem; }
+}
+
+/* Fix sort select taking full width */
+.plp__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  gap: 1rem;
+}
+
+.plp__sort {
+  width: auto;          /* ← stops it stretching full width */
+  min-width: 200px;
+}
+
+/* Fix main area having no class */
+.plp__main {
+  min-width: 0;
+  flex: 1;
+}
+
+/* Fix breadcrumb overlapping title */
+.plp__title {
+  margin-top: 1.25rem;
+}
+
+.plp {
+  background: #faf7f2;
+  min-height: 80vh;
+  padding-bottom: 4rem;
+  padding-top: 1.5rem; /* ← add this */
+}
+
+.plp__breadcrumb {
+  background: #fff;
+  border-bottom: 1px solid #ede8de;
+  padding: 0.6rem 0;
+  font-size: 0.8rem;
+  color: #8B7355;
+  margin-bottom: 0;
+  margin-top: -1.5rem; /* pull breadcrumb back up */
+}
+
+.plp__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 500;
+  color: #1A1208;
+  margin: 1.5rem 0 0.25rem;
+}
+.plp__main { min-width: 0; }
+.plp__sub em { font-style: italic; color: #E8920A; }
+.plp { padding-top: 0; }
+.plp__title { margin-top: 1.5rem; }
+
+/* Remove any persistent hover state */
+.pc__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.38);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  opacity: 0;
+  transition: opacity .3s;
+  padding: .75rem;
+  pointer-events: none; /* ← add this */
+}
+
+.pc:hover .pc__overlay {
+  opacity: 1;
+  pointer-events: all; /* ← add this */
+}

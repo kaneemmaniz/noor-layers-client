@@ -1,0 +1,322 @@
+/* ════════════════════════════════════════════════
+   APP SHELL — Public layout wrapper
+══════════════════════════════════════════════════ */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Loading screen */
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: #8B7355;
+  background: #FAF6EE;
+}
+/* ════════════════════════════════════════════════
+   APP LAYOUT
+══════════════════════════════════════════════════ */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* Account for fixed navbar */
+
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: #8B7355;
+  background: #FAF6EE;
+}
+/* ════════════════════════════════════════════════
+   CART TOAST NOTIFICATIONS (Custom)
+══════════════════════════════════════════════════ */
+.nl-toast-cart {
+  background: #fff;
+  border: 1px solid rgba(139, 115, 85, 0.18);
+  border-radius: 14px;
+  padding: 0.85rem;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 320px;
+  max-width: 380px;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.nl-toast-cart::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(180deg, #E8920A 0%, #d97f06 100%);
+}
+
+.nl-toast-cart--show {
+  animation: nl-toast-slide-in 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nl-toast-cart--hide {
+  animation: nl-toast-slide-out 0.25s ease-in;
+}
+
+@keyframes nl-toast-slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes nl-toast-slide-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Product image */
+.nl-toast-cart__img-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.nl-toast-cart__img-wrap img {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+  background: #F8F6F1;
+}
+
+.nl-toast-cart__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #2ECC71;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  animation: nl-badge-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+@keyframes nl-badge-pop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Body */
+.nl-toast-cart__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.nl-toast-cart__title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #2ECC71;
+  margin-bottom: 0.2rem;
+}
+
+.nl-toast-cart__name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #1A1208;
+  margin-bottom: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nl-toast-cart__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nl-toast-cart__view-btn {
+  background: linear-gradient(135deg, #E8920A 0%, #d97f06 100%);
+  color: #fff;
+  border: none;
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Jost', sans-serif;
+}
+
+.nl-toast-cart__view-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(232, 146, 10, 0.3);
+}
+
+/* Close button */
+.nl-toast-cart__close {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #F8F6F1;
+  border: none;
+  color: #8B7355;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.nl-toast-cart__close:hover {
+  background: rgba(231, 76, 60, 0.12);
+  color: #E74C3C;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .nl-toast-cart {
+    min-width: calc(100vw - 32px);
+    max-width: calc(100vw - 32px);
+  }
+}
+
+/* Ensure content isn't hidden behind fixed navbar */
+.main-content {
+  padding-top: 80px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 70px;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE OPTIMIZATIONS
+═══════════════════════════════════════════════ */
+
+/* Prevent horizontal scroll */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Ensure images never overflow */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better touch targets for buttons/links on mobile */
+@media (max-width: 768px) {
+  button,
+  a.btn,
+  .clickable {
+    min-height: 44px;
+  }
+  
+  /* Ensure buttons have enough spacing */
+  .btn {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+  
+  /* Larger tap targets for icons */
+  .icon-btn,
+  .nb__icon,
+  .nb__burger {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Container padding */
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  /* Prevent form zoom on iOS */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+  
+  /* Better readable text */
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  
+  /* Stack things properly */
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* Ensure fixed navbar doesn't cover content */
+.main-content {
+  padding-top: 80px;
+  min-height: calc(100vh - 400px);
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 70px;
+  }
+}
+
+/* Better focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid #E8920A;
+  outline-offset: 2px;
+}

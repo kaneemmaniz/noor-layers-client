@@ -1,0 +1,190 @@
+/* ════════════════════════════════════════════════
+   PAYMENT CALLBACK PAGE
+══════════════════════════════════════════════════ */
+.nl-callback-page {
+  min-height: 100vh;
+  background: #FAF6EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1rem 3rem;
+}
+
+.nl-callback-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(139, 115, 85, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.nl-callback-card::before,
+.nl-callback-card::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.nl-callback-card::before {
+  top: -150px;
+  left: -150px;
+  background: radial-gradient(circle, rgba(232, 146, 10, 0.08) 0%, transparent 70%);
+}
+
+.nl-callback-card::after {
+  bottom: -150px;
+  right: -150px;
+  background: radial-gradient(circle, rgba(232, 146, 10, 0.05) 0%, transparent 70%);
+}
+
+.nl-callback-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── SPINNER ─── */
+.nl-callback-spinner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.nl-spinner-ring {
+  width: 80px;
+  height: 80px;
+  border: 4px solid rgba(232, 146, 10, 0.15);
+  border-top-color: #E8920A;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── ICONS ─── */
+.nl-callback-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  animation: pop 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.nl-callback-icon--success {
+  background: rgba(46, 204, 113, 0.12);
+  color: #2ECC71;
+}
+
+.nl-callback-icon--failed {
+  background: rgba(231, 76, 60, 0.12);
+  color: #E74C3C;
+}
+
+/* ─── TYPOGRAPHY ─── */
+.nl-callback-card h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1A1208;
+  margin: 0 0 0.75rem;
+}
+
+.nl-callback-card p {
+  color: #8B7355;
+  font-size: 1rem;
+  margin: 0 0 1rem;
+  line-height: 1.6;
+}
+
+.nl-callback-card small {
+  color: rgba(139, 115, 85, 0.7);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* ─── DETAILS BOX ─── */
+.nl-callback-details {
+  background: linear-gradient(135deg, #F5F1E8 0%, #FAF6EE 100%);
+  border: 1px dashed rgba(232, 146, 10, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0 2rem;
+  text-align: left;
+}
+
+.nl-callback-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed rgba(139, 115, 85, 0.15);
+  font-size: 0.9rem;
+  gap: 1rem;
+}
+
+.nl-callback-row:last-child {
+  border-bottom: none;
+}
+
+.nl-callback-row span {
+  color: #8B7355;
+}
+
+.nl-callback-row strong {
+  color: #1A1208;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  word-break: break-all;
+  text-align: right;
+}
+
+.nl-callback-amount {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.2rem !important;
+  color: #E8920A !important;
+}
+
+/* ─── ACTIONS ─── */
+.nl-callback-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 576px) {
+  .nl-callback-card {
+    padding: 2.25rem 1.5rem;
+  }
+  
+  .nl-callback-card h1 {
+    font-size: 1.6rem;
+  }
+  
+  .nl-callback-actions {
+    flex-direction: column;
+  }
+  
+  .nl-callback-actions .btn {
+    width: 100%;
+  }
+}

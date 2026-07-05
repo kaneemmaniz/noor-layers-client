@@ -1,0 +1,534 @@
+/* ════════════════════════════════════════════════
+   PRODUCT DETAIL PAGE — Noor Layers
+══════════════════════════════════════════════════ */
+.nl-detail-page {
+  background: var(--nl-bg);
+  min-height: 100vh;
+  padding: 2rem 0 5rem;
+}
+
+/* Breadcrumb (reuses Products.css pattern) */
+.nl-detail-page .nl-breadcrumb {
+  margin-bottom: 2rem;
+}
+.nl-detail-page .nl-breadcrumb ol {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: .85rem;
+}
+.nl-detail-page .nl-breadcrumb li:not(:last-child)::after {
+  content: "›";
+  margin-left: .5rem;
+  color: var(--nl-muted);
+}
+.nl-detail-page .nl-breadcrumb a {
+  color: var(--nl-muted);
+  text-decoration: none;
+  transition: color .2s;
+}
+.nl-detail-page .nl-breadcrumb a:hover {
+  color: var(--nl-orange);
+}
+.nl-detail-page .nl-breadcrumb .active {
+  color: var(--nl-black);
+  font-weight: 500;
+}
+
+/* ═══ GALLERY ═══ */
+.nl-gallery {
+  display: flex;
+  gap: 1rem;
+}
+
+.nl-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  flex-shrink: 0;
+}
+
+.nl-thumb {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid var(--nl-border);
+  background: #F5F0E8;
+  cursor: pointer;
+  padding: 0;
+  transition: all .2s;
+}
+.nl-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.nl-thumb:hover {
+  border-color: var(--nl-orange-line);
+}
+.nl-thumb.active {
+  border-color: var(--nl-orange);
+  box-shadow: 0 0 0 2px var(--nl-orange-soft);
+}
+
+.nl-main-image {
+  flex: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #F5F0E8;
+  border: 1px solid var(--nl-border);
+  aspect-ratio: 3/4;
+  max-height: 600px;
+}
+.nl-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity .3s;
+}
+
+/* ═══ PRODUCT INFO ═══ */
+.nl-product-detail {
+  padding: 0;
+}
+
+.nl-detail-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--nl-black);
+  margin: 0 0 .75rem;
+  line-height: 1.2;
+}
+
+.nl-detail-price {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--nl-orange);
+  margin-bottom: 1.25rem;
+}
+
+.nl-detail-desc {
+  color: var(--nl-muted);
+  font-size: .95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.nl-detail-block {
+  margin-bottom: 1.5rem;
+}
+
+.nl-detail-label {
+  display: block;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--nl-black);
+  margin-bottom: .75rem;
+}
+
+.nl-color-name {
+  font-weight: 400;
+  color: var(--nl-muted);
+}
+
+/* Color Swatches */
+.nl-color-swatches {
+  display: flex;
+  gap: .6rem;
+}
+.nl-swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  outline: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: outline-color .2s, transform .2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,.1);
+}
+.nl-swatch:hover {
+  transform: scale(1.1);
+}
+.nl-swatch.active {
+  outline-color: var(--nl-orange);
+}
+
+/* Quantity */
+.nl-qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--nl-border);
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+}
+.nl-qty button {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  color: var(--nl-black);
+  cursor: pointer;
+  transition: background .2s;
+}
+.nl-qty button:hover:not(:disabled) {
+  background: var(--nl-orange-soft);
+  color: var(--nl-orange);
+}
+.nl-qty button:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+}
+.nl-qty span {
+  min-width: 50px;
+  text-align: center;
+  font-weight: 600;
+  color: var(--nl-black);
+  font-size: .95rem;
+}
+
+/* Action Buttons */
+.nl-detail-actions {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+  margin: 1.5rem 0;
+}
+
+.nl-btn-add {
+  background: var(--nl-orange) !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 1rem 1.5rem !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: .95rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: .6rem !important;
+  cursor: pointer;
+  transition: all .25s ease;
+  box-shadow: 0 8px 20px rgba(232,146,10,.25);
+}
+.nl-btn-add:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(232,146,10,.35);
+}
+.nl-btn-add.added {
+  background: #2ECC71 !important;
+  box-shadow: 0 8px 20px rgba(46,204,113,.25);
+}
+
+.nl-btn-buy {
+  background: #fff !important;
+  color: var(--nl-black) !important;
+  border: 1.5px solid var(--nl-border) !important;
+  padding: 1rem 1.5rem !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: .95rem !important;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+.nl-btn-buy:hover {
+  border-color: var(--nl-orange) !important;
+  color: var(--nl-orange) !important;
+  background: var(--nl-orange-soft) !important;
+}
+
+/* Trust Mini Row */
+.nl-trust-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1.25rem;
+  background: #fff;
+  border: 1px solid var(--nl-border);
+  border-radius: 12px;
+  margin: 1.5rem 0;
+}
+
+.nl-trust-mini {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.nl-trust-mini__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--nl-orange-line);
+  color: var(--nl-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nl-trust-mini__title {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--nl-black);
+  line-height: 1.2;
+}
+
+.nl-trust-mini__sub {
+  font-size: .7rem;
+  color: var(--nl-muted);
+  margin-top: .15rem;
+}
+
+/* Product Details Block */
+.nl-product-details-block {
+  border-top: 1px solid var(--nl-border);
+  padding-top: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.nl-details-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--nl-black);
+  margin: 0 0 .75rem;
+}
+
+.nl-details-intro {
+  color: var(--nl-muted);
+  font-size: .9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.nl-details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nl-details-list li {
+  padding: .4rem 0;
+  font-size: .88rem;
+  color: var(--nl-muted);
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.nl-details-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--nl-orange);
+  font-weight: bold;
+}
+
+.nl-details-list strong {
+  color: var(--nl-black);
+  font-weight: 600;
+  margin-right: .25rem;
+}
+
+/* Loading State */
+.nl-detail-skeleton {
+  text-align: center;
+  padding: 4rem;
+  color: var(--nl-muted);
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 991px) {
+  .nl-detail-name {
+    font-size: 1.7rem;
+  }
+  .nl-detail-price {
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .nl-detail-page {
+    padding: 1rem 0 3rem;
+  }
+  .nl-gallery {
+    flex-direction: column-reverse;
+  }
+  .nl-thumbs {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: .5rem;
+  }
+  .nl-thumb {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+  }
+  .nl-trust-row {
+    grid-template-columns: 1fr;
+    gap: .75rem;
+  }
+  .nl-detail-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 576px) {
+  .nl-detail-name {
+    font-size: 1.5rem;
+  }
+  .nl-detail-price {
+    font-size: 1.5rem;
+  }
+  .nl-main-image {
+    aspect-ratio: 1/1;
+  }
+}
+
+/* ===== No Image Placeholder ===== */
+.nl-no-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  background: #f3f4f6;
+  color: #9ca3af;
+  gap: 16px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 12px;
+}
+
+.nl-no-image svg {
+  opacity: 0.4;
+}
+
+/* ===== Error State ===== */
+.nl-detail-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  gap: 16px;
+}
+
+.nl-detail-error h2 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 24px;
+}
+
+.nl-detail-error p {
+  margin: 0 0 12px 0;
+  color: #6b7280;
+}
+
+/* ===== Stock Status ===== */
+.nl-stock-status {
+  margin: 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nl-stock-in {
+  color: #059669;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nl-stock-in::before {
+  content: "●";
+  color: #10b981;
+}
+
+.nl-stock-low {
+  color: #d97706;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nl-stock-low::before {
+  content: "●";
+  color: #f59e0b;
+}
+
+.nl-stock-out {
+  color: #dc2626;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nl-stock-out::before {
+  content: "●";
+  color: #ef4444;
+}
+
+/* ===== Price Row (with old price for discounts) ===== */
+.nl-detail-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.nl-detail-price-old {
+  color: #9ca3af;
+  text-decoration: line-through;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* ===== Disabled buttons ===== */
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nl-btn-add:disabled,
+.nl-btn-buy:disabled {
+  background: #d1d5db;
+  color: #6b7280;
+  border-color: #d1d5db;
+}
+
+.nl-thumb {
+  position: relative;
+}
+
+.nl-thumb__label {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.nl-thumb.active .nl-thumb__label,
+.nl-thumb:hover .nl-thumb__label {
+  opacity: 1;
+}

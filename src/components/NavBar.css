@@ -1,0 +1,554 @@
+/* ════════════════════════════════════════════════
+   NAVBAR — Noor Layers
+══════════════════════════════════════════════════ */
+.nb {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 3rem;
+  background: rgba(250, 246, 238, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+  font-family: 'Jost', sans-serif;
+  height: 80px;
+}
+
+.nb--scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(139, 115, 85, 0.12);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+/* ─── LOGO ─── */
+.nb__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.nb__logo:hover {
+  transform: translateY(-1px);
+}
+
+.nb__logo-words {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.nb__brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1A1208;
+}
+
+.nb__tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #E8920A;
+  margin-top: 0.2rem;
+}
+
+/* ─── NAV LINKS ─── */
+.nb__links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nb__link {
+  position: relative;
+  padding: 0.6rem 1rem;
+  color: #2A1F12;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nb__link::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 18px;
+  height: 2px;
+  background: #E8920A;
+  border-radius: 2px;
+  transition: transform 0.25s ease;
+}
+
+.nb__link:hover {
+  color: #E8920A;
+}
+
+.nb__link:hover::after,
+.nb__link--active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.nb__link--active {
+  color: #E8920A;
+  font-weight: 600;
+}
+
+/* ─── ADMIN LINK ─── */
+.nb__link--admin {
+  background: linear-gradient(135deg, rgba(232, 146, 10, 0.1) 0%, rgba(232, 146, 10, 0.05) 100%);
+  color: #E8920A !important;
+  padding: 0.5rem 0.9rem !important;
+  border-radius: 8px;
+  border: 1px solid rgba(232, 146, 10, 0.25);
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+}
+
+.nb__link--admin::after {
+  display: none;
+}
+
+.nb__link--admin:hover {
+  background: linear-gradient(135deg, #E8920A 0%, #d97f06 100%);
+  color: #fff !important;
+  border-color: #E8920A;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(232, 146, 10, 0.25);
+}
+
+.nb__link--admin.nb__link--active {
+  background: linear-gradient(135deg, #E8920A 0%, #d97f06 100%);
+  color: #fff !important;
+  border-color: #E8920A;
+}
+
+/* ─── RIGHT ACTIONS ─── */
+.nb__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nb__icon {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  color: #2A1F12;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.nb__icon:hover {
+  background: rgba(232, 146, 10, 0.08);
+  color: #E8920A;
+}
+
+.nb__badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: #E8920A;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #FAF6EE;
+}
+
+/* ─── CTA BUTTON (Shop Now / Sign Out) ─── */
+.nb__cta,
+.btn-gold {
+  background: linear-gradient(135deg, #E8920A 0%, #d97f06 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  padding: 0.65rem 1.4rem !important;
+  border-radius: 10px !important;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-left: 0.5rem;
+  box-shadow: 0 6px 18px rgba(232, 146, 10, 0.25);
+  white-space: nowrap;
+}
+
+.nb__cta:hover,
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(232, 146, 10, 0.35);
+  filter: brightness(0.98);
+}
+
+/* Outline button (logout in drawer) */
+.btn-outline {
+  background: transparent !important;
+  color: #E8920A !important;
+  border: 1.5px solid #E8920A !important;
+  padding: 0.7rem 1.4rem !important;
+  border-radius: 10px !important;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-outline:hover {
+  background: rgba(232, 146, 10, 0.08) !important;
+}
+
+/* ─── BURGER MENU (Mobile only) ─── */
+.nb__burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  margin-left: 0.25rem;
+}
+
+.nb__burger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #1A1208;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.nb__burger span.x:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nb__burger span.x:nth-child(2) {
+  opacity: 0;
+}
+
+.nb__burger span.x:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ─── MOBILE DRAWER ─── */
+.nb__drawer {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-bottom: 1px solid rgba(139, 115, 85, 0.12);
+  padding: 1.5rem 2rem;
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+}
+
+.nb__drawer--open {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+
+.nb__drawer-link {
+  display: block;
+  padding: 0.85rem 1rem;
+  color: #2A1F12;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.nb__drawer-link:hover,
+.nb__drawer-link.active {
+  background: rgba(232, 146, 10, 0.08);
+  color: #E8920A;
+}
+
+.nb__drawer-link--admin {
+  background: linear-gradient(135deg, rgba(232, 146, 10, 0.1) 0%, rgba(232, 146, 10, 0.05) 100%);
+  color: #E8920A !important;
+  border-radius: 10px;
+  border: 1px solid rgba(232, 146, 10, 0.25);
+  font-weight: 600;
+}
+
+.nb__drawer-link--admin.active {
+  background: linear-gradient(135deg, #E8920A 0%, #d97f06 100%);
+  color: #fff !important;
+}
+
+.nb__drawer-foot {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(139, 115, 85, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.nb__drawer-row {
+  background: rgba(232, 146, 10, 0.06);
+  border: 1px solid rgba(232, 146, 10, 0.2);
+  color: #1A1208;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.nb__drawer-row:hover {
+  background: rgba(232, 146, 10, 0.12);
+}
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════ */
+@media (max-width: 991px) {
+  .nb {
+    padding: 0.85rem 1.5rem;
+  }
+  
+  .nb__links {
+    display: none;
+  }
+  
+  .nb__burger {
+    display: flex;
+  }
+  
+  .nb__cta {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .nb {
+    padding: 0.75rem 1rem;
+    height: 70px;
+  }
+  
+  .nb__brand {
+    font-size: 1.1rem;
+  }
+  
+  .nb__tag {
+    font-size: 0.6rem;
+  }
+  
+  .nb__drawer {
+    top: 70px;
+    padding: 1.25rem;
+  }
+  
+  .nb__icon {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* ─── HIDE DRAWER ON DESKTOP ─── */
+@media (min-width: 992px) {
+  .nb__drawer {
+    display: none;
+  }
+}
+
+/* Mobile - Bigger touch targets */
+@media (max-width: 768px) {
+  .nb__icon {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    padding: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .nb__burger {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    padding: 10px !important;
+  }
+  
+  .nb__cta {
+    min-height: 44px !important;
+    padding: 10px 20px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   MOBILE NAVBAR - OPTION C (Icons visible)
+═══════════════════════════════════════════════ */
+
+@media (max-width: 992px) {
+  /* Hide desktop nav links */
+  .nb__links {
+    display: none !important;
+  }
+  
+  /* Hide "Sign Out" / "Shop Now" button on mobile */
+  .nb__cta {
+    display: none !important;
+  }
+  
+  /* Show burger menu */
+  .nb__burger {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .nb__burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #1A1208;
+    transition: all 0.3s;
+  }
+  
+  .nb__burger span.x:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  
+  .nb__burger span.x:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .nb__burger span.x:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+  
+  /* SHOW all icons (search, cart, account) */
+  .nb__icon {
+    display: flex !important;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Tighter spacing between icons */
+  .nb__actions {
+    gap: 2px;
+  }
+  
+  /* Keep logo visible with brand name */
+  .nb__logo {
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .nb__logo-words {
+    display: flex !important;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  
+  .nb__brand {
+    font-size: 14px !important;
+    font-weight: 700;
+    color: #1A1208;
+    display: block !important;
+  }
+  
+  .nb__tag {
+    font-size: 8px !important;
+    letter-spacing: 1px;
+    color: #8B7355;
+    display: block !important;
+  }
+  
+  /* Make logo SVG smaller */
+  .nb__logo svg {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  
+  /* Navbar container padding */
+  .nb {
+    padding: 8px 12px !important;
+  }
+}
+
+/* Very small screens (< 400px) */
+@media (max-width: 400px) {
+  .nb__tag {
+    display: none !important; /* Hide "WEAR YOUR LIGHT" tagline */
+  }
+  
+  .nb__brand {
+    font-size: 13px !important;
+  }
+  
+  .nb__logo svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .nb__icon {
+    min-width: 36px;
+    min-height: 36px;
+    padding: 6px;
+  }
+  
+  .nb__actions {
+    gap: 0;
+  }
+}

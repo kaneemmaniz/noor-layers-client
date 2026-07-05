@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap');
+
+/* ── HARD RESET ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── CSS VARIABLES ── */
+:root {
+  --gold:         #E8920A;
+  --gold-light:   #F5A623;
+  --gold-dim:     rgba(232,146,10,0.10);
+  --gold-glow:    rgba(232,146,10,0.22);
+  --bg:           #FAF7F2;
+  --bg-card:      #FFFFFF;
+  --bg-elevated:  #F2EDE3;
+  --bg-section:   #EDE8DE;
+  --text:         #1A1208;
+  --text-muted:   #8B7355;
+  --text-light:   #B8A48A;
+  --border:       rgba(180,150,100,0.2);
+  --border-strong:rgba(180,150,100,0.4);
+  --shadow:       0 2px 16px rgba(0,0,0,0.06);
+  --shadow-lg:    0 8px 40px rgba(0,0,0,0.10);
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Jost', sans-serif;
+  --nav-h:        68px;
+  --radius:       10px;
+  --radius-lg:    16px;
+  --max-w:        1280px;
+}
+
+/* ── FORCE CREAM BACKGROUND EVERYWHERE ── */
+html {
+  scroll-behavior: smooth;
+  background-color: #FAF7F2 !important;
+}
+
+body {
+  background-color: #FAF7F2 !important;
+  background: #FAF7F2 !important;
+  color: #1A1208 !important;
+  font-family: 'Jost', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#root {
+  background-color: #FAF7F2;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4, h5 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #1A1208;
+}
+p { color: inherit; }
+a { color: #E8920A; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+/* ── GLOBAL BUTTONS ── */
+.btn-gold {
+  background: #E8920A;
+  color: #fff !important;
+  border: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 10px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  text-decoration: none;
+}
+.btn-gold:hover {
+  background: #F5A623;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(232,146,10,0.22);
+  color: #fff !important;
+}
+.btn-gold:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.btn-outline {
+  background: transparent;
+  color: #E8920A;
+  border: 1.5px solid #E8920A;
+  padding: 0.7rem 1.6rem;
+  border-radius: 10px;
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.btn-outline:hover { background: #E8920A; color: #fff; }
+
+/* ── GLOBAL INPUTS ── */
+input, select, textarea {
+  background: #fff;
+  border: 1.5px solid rgba(180,150,100,0.4);
+  color: #1A1208;
+  padding: 0.72rem 1rem;
+  border-radius: 10px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+  width: 100%;
+  transition: border-color 0.3s;
+}
+input:focus, select:focus, textarea:focus { border-color: #E8920A; }
+input::placeholder, textarea::placeholder { color: #B8A48A; }
+
+/* ── UTILITIES ── */
+.section-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: #E8920A;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: #E8920A;
+  background: #FAF7F2;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

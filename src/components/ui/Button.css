@@ -1,0 +1,30 @@
+.nl-btn {
+  padding: 0.7em 2em;
+  border-radius: 4px;
+  border: none;
+  font-size: 1.1em;
+  font-weight: 700;
+  font-family: 'Montserrat', Arial, sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.nl-btn-primary {
+  background: #FFA500;
+  color: #181818;
+}
+.nl-btn-primary:hover {
+  background: #FFD580;
+  color: #181818;
+}
+
+.nl-btn-outline {
+  background: transparent;
+  color: #FFA500;
+  border: 2px solid #FFA500;
+}
+.nl-btn-outline:hover {
+  background: #FFA500;
+  color: #181818;
+}

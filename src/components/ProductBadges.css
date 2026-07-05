@@ -1,0 +1,157 @@
+/* ════════════════════════════════════════════════
+   PRODUCT BADGES — Smart Indicators
+══════════════════════════════════════════════════ */
+.nl-badges {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.nl-badges--top-left {
+  top: 12px;
+  left: 12px;
+}
+
+.nl-badges--top-right {
+  top: 12px;
+  right: 12px;
+}
+
+.nl-badges--stack {
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* ─── BASE BADGE ─── */
+.nl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 100px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: nl-badge-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--badge-delay, 0ms);
+  white-space: nowrap;
+}
+
+@keyframes nl-badge-pop {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.3) translateX(-10px);
+  }
+  60% { 
+    transform: scale(1.05) translateX(0);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) translateX(0);
+  }
+}
+
+.nl-badge__icon {
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.nl-badge__label {
+  line-height: 1;
+}
+
+/* ─── BADGE TYPES ─── */
+
+/* NEW — Green */
+.nl-badge--new {
+  background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+  color: #fff;
+}
+
+/* SALE — Red */
+.nl-badge--sale {
+  background: linear-gradient(135deg, #E74C3C 0%, #c0392b 100%);
+  color: #fff;
+  animation: nl-badge-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) both,
+             nl-badge-pulse 2s ease-in-out infinite 1s;
+}
+
+@keyframes nl-badge-pulse {
+  0%, 100% { 
+    box-shadow: 0 4px 12px rgba(231, 76, 60, 0.25);
+  }
+  50% { 
+    box-shadow: 0 4px 16px rgba(231, 76, 60, 0.55);
+  }
+}
+
+/* SOLD OUT — Dark */
+.nl-badge--soldout {
+  background: linear-gradient(135deg, #2C3E50 0%, #1a1208 100%);
+  color: #fff;
+}
+
+/* LOW STOCK — Orange */
+.nl-badge--low-stock {
+  background: linear-gradient(135deg, #E8920A 0%, #d97f06 100%);
+  color: #fff;
+}
+
+/* BESTSELLER — Purple */
+.nl-badge--bestseller {
+  background: linear-gradient(135deg, #9B59B6 0%, #8E44AD 100%);
+  color: #fff;
+}
+
+/* FEATURED — Gold */
+.nl-badge--featured {
+  background: linear-gradient(135deg, #F39C12 0%, #D68910 100%);
+  color: #fff;
+}
+
+/* ═══ SOLD OUT GREY OVERLAY (on product image) ═══ */
+.nl-product-soldout-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.nl-product-soldout-overlay::before {
+  content: "SOLD OUT";
+  background: rgba(26, 18, 8, 0.9);
+  color: #fff;
+  padding: 0.4rem 1.5rem;
+  border-radius: 100px;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  backdrop-filter: blur(10px);
+}
+
+/* ═══ MOBILE ═══ */
+@media (max-width: 576px) {
+  .nl-badge {
+    padding: 0.25rem 0.55rem;
+    font-size: 0.62rem;
+  }
+  
+  .nl-badges {
+    gap: 0.3rem;
+  }
+}

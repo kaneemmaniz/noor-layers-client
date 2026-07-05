@@ -1,0 +1,361 @@
+/* ════════════════════════════════════════════════
+   ADMIN LAYOUT
+══════════════════════════════════════════════════ */
+.nl-admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #F8F6F1;
+  font-family: 'Jost', sans-serif;
+}
+
+/* ─── SIDEBAR ─── */
+.nl-admin-sidebar {
+  width: 260px;
+  background: #fff;
+  border-right: 1px solid rgba(139, 115, 85, 0.12);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 100;
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.04);
+}
+
+.nl-admin-sidebar__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 1.25rem;
+  border-bottom: 1px solid rgba(139, 115, 85, 0.12);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.nl-admin-sidebar__logo:hover {
+  background: rgba(232, 146, 10, 0.04);
+}
+
+.nl-admin-sidebar__brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1A1208;
+  line-height: 1;
+}
+
+.nl-admin-sidebar__tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #E8920A;
+  margin-top: 0.25rem;
+}
+
+/* ─── NAV LINKS ─── */
+.nl-admin-sidebar__nav {
+  flex: 1;
+  padding: 1rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  overflow-y: auto;
+}
+
+.nl-admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  color: #8B7355;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.nl-admin-nav-link:hover {
+  background: rgba(232, 146, 10, 0.06);
+  color: #E8920A;
+}
+
+.nl-admin-nav-link.active {
+  background: linear-gradient(135deg, #E8920A 0%, #d97f06 100%);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(232, 146, 10, 0.3);
+}
+
+.nl-admin-nav-link__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nl-admin-nav-link__indicator {
+  position: absolute;
+  right: 1rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+/* ─── SIDEBAR FOOTER (USER) ─── */
+.nl-admin-sidebar__footer {
+  padding: 1rem;
+  border-top: 1px solid rgba(139, 115, 85, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nl-admin-user {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.nl-admin-user__avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #E8920A 0%, #d97f06 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.nl-admin-user__info {
+  min-width: 0;
+}
+
+.nl-admin-user__name {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #1A1208;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nl-admin-user__role {
+  font-size: 0.7rem;
+  color: #8B7355;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.1rem;
+}
+
+.nl-admin-logout {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(231, 76, 60, 0.08);
+  border: none;
+  color: #E74C3C;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.nl-admin-logout:hover {
+  background: #E74C3C;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* ─── MAIN CONTENT ─── */
+.nl-admin-main {
+  flex: 1;
+  margin-left: 260px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nl-admin-topbar {
+  background: #fff;
+  border-bottom: 1px solid rgba(139, 115, 85, 0.12);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(10px);
+}
+
+.nl-admin-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #1A1208;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+.nl-admin-hamburger:hover {
+  background: rgba(232, 146, 10, 0.08);
+}
+
+.nl-admin-topbar__title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #1A1208;
+  flex: 1;
+}
+
+.nl-admin-topbar__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nl-admin-topbar__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(232, 146, 10, 0.08);
+  border: 1px solid rgba(232, 146, 10, 0.2);
+  color: #E8920A;
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.nl-admin-topbar__btn:hover {
+  background: #E8920A;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.nl-admin-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* ─── BACKDROP ─── */
+.nl-admin-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 991px) {
+  .nl-admin-sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .nl-admin-sidebar--open {
+    transform: translateX(0);
+  }
+  
+  .nl-admin-backdrop {
+    display: block;
+  }
+  
+  .nl-admin-main {
+    margin-left: 0;
+  }
+  
+  .nl-admin-hamburger {
+    display: flex;
+  }
+}
+
+@media (max-width: 576px) {
+  .nl-admin-topbar {
+    padding: 1rem 1.25rem;
+  }
+  
+  .nl-admin-content {
+    padding: 1.25rem;
+  }
+  
+  .nl-admin-topbar__title {
+    font-size: 1.15rem;
+  }
+}
+
+/* ─── NEW ORDER BADGE ─── */
+.nl-admin-nav-link__badge {
+  position: absolute;
+  right: 1rem;
+  background: #E74C3C;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-badge 1.5s ease-in-out infinite;
+}
+
+.nl-admin-nav-link.active .nl-admin-nav-link__badge {
+  background: #fff;
+  color: #E74C3C;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { 
+    transform: scale(1); 
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.5);
+  }
+  50% { 
+    transform: scale(1.05); 
+    box-shadow: 0 0 0 6px rgba(231, 76, 60, 0);
+  }
+}
+
+/* ─── TOPBAR NOTIFICATION ─── */
+.nl-admin-topbar__notification {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(231, 76, 60, 0.12);
+  color: #E74C3C;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+  margin-left: 0.75rem;
+  vertical-align: middle;
+  animation: pulse-notif 2s ease-in-out infinite;
+}
+
+@keyframes pulse-notif {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
