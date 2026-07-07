@@ -15,18 +15,38 @@ export const productsAPI = {
   getAll: (params) => api.get("/api/v1/products", { params }),
   getById: (id) => api.get(`/api/v1/products/${id}`),
   
-  // Updated: takes text params separately from images
-  create: (textParams, imageFormData) => {
-    return api.post("/api/v1/products", imageFormData, {
-      params: textParams,  // axios will add these as query string
-      headers: { "Content-Type": "multipart/form-data" }
-    });
-  },
+  // ⚠️ MUST be like this - single argument, JSON body
+  create: (productData) => {
+  // Backend expects text fields as query params
+  return api.post("/api/v1/products", null, {
+    params: productData
+  });
+},
+  update: (id, data) => api.put(`/api/v1/products/${id}`, null, {
+  params: data
+}),
   
-  update: (id, data) => api.put(`/api/v1/products/${id}`, data),
-  updateImages: (id, formData) => api.put(`/api/v1/products/${id}/images`, formData),
+  uploadImages: (id, formData) => api.put(`/api/v1/products/${id}/images`, formData, {
+    headers: { "Content-Type": "multipart/form-data" }
+  }),
+  
   delete: (id) => api.delete(`/api/v1/products/${id}`),
 };
+
+// ════════════════════════════════════════════════
+// CATEGORIES API
+// ════════════════════════════════════════════════
+export const categoriesAPI = {
+  getAll: () => api.get("/api/v1/categories"),
+  create: (data) => api.post("/api/v1/categories", data, {
+    headers: { "Content-Type": "application/json" }
+  }),
+  update: (id, data) => api.put(`/api/v1/categories/${id}`, data, {
+    headers: { "Content-Type": "application/json" }
+  }),
+  delete: (id) => api.delete(`/api/v1/categories/${id}`),
+};
+
 // ════════════════════════════════════════════════
 // CART API
 // ════════════════════════════════════════════════

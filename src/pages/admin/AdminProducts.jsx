@@ -1,18 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import { productsAPI } from "../../api";
+import { productsAPI, categoriesAPI } from "../../api";
 import toast from "react-hot-toast";
 import "./Admin.css";
-
-const CATEGORIES = [
-  { id: "Hijabs", name: "Hijabs" },
-  { id: "Abayas", name: "Abayas" },
-  { id: "Scarves", name: "Scarves" },
-  { id: "Jerseys", name: "Jerseys" },
-  { id: "Accessories", name: "Accessories" },
-  { id: "Gift Packages", name: "Gift Packages" },
-];
 
 const EMPTY_FORM = {
   name: "",
@@ -31,6 +22,7 @@ export default function AdminProducts() {
   const { user } = useAuth();
 
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -38,14 +30,26 @@ export default function AdminProducts() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
   
-  // File input refs (for resetting)
   const frontRef = useRef(null);
   const backRef = useRef(null);
   const sideRef = useRef(null);
 
   useEffect(() => {
     fetchProducts();
+    fetchCategories();
   }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await categoriesAPI.getAll();
+      const cats = Array.isArray(response.data) ? response.data : [];
+      console.log("📁 Categories loaded:", cats);
+      setCategories(cats);
+    } catch (err) {
+      console.error("Failed to load categories:", err);
+      toast.error("Failed to load categories");
+    }
+  };
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -65,19 +69,16 @@ export default function AdminProducts() {
     if (errors[name]) setErrors({ ...errors, [name]: "" });
   };
 
-  // Handle file selection
   const handleFileChange = (e) => {
     const { name, files } = e.target;
     if (files && files.length > 0) {
       const file = files[0];
       
-      // Validate file size (max 5 MB)
       if (file.size > 5 * 1024 * 1024) {
         toast.error("Image must be smaller than 5MB");
         return;
       }
       
-      // Validate file type
       if (!file.type.startsWith("image/")) {
         toast.error("Please upload an image file");
         return;
@@ -88,10 +89,8 @@ export default function AdminProducts() {
     }
   };
 
-  // Remove a selected file
   const handleRemoveFile = (fieldName) => {
     setForm({ ...form, [fieldName]: null });
-    // Reset the file input
     if (fieldName === "frontImage" && frontRef.current) frontRef.current.value = "";
     if (fieldName === "backImage" && backRef.current) backRef.current.value = "";
     if (fieldName === "sideImage" && sideRef.current) sideRef.current.value = "";
@@ -104,109 +103,174 @@ export default function AdminProducts() {
     if (!form.price || Number(form.price) <= 0) errs.price = "Valid price is required";
     if (!form.stockQuantity || Number(form.stockQuantity) < 0) errs.stockQuantity = "Stock is required";
     if (!form.categoryId.trim()) errs.categoryId = "Category is required";
-    if (!editingId && !form.frontImage) errs.frontImage = "Front image is required";
+    if (!editingId && !(form.frontImage instanceof File)) errs.frontImage = "Front image is required";
     return errs;
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  const errs = validate();
-  if (Object.keys(errs).length > 0) {
-    setErrors(errs);
-    toast.error("Please fix the errors in the form");
-    return;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const errs = validate();
+    if (Object.keys(errs).length > 0) {
+      setErrors(errs);
+      toast.error("Please fix the errors in the form");
+      return;
+    }
 
-  setSubmitting(true);
-  try {
-    // Text fields → query parameters
-    const textParams = {
-      Name: form.name.trim(),
-      Description: form.description.trim(),
-      Price: Number(form.price),
-      StockQuantity: Number(form.stockQuantity),
-      IsAvailable: form.isAvailable,
-      // CategoryId: form.categoryId,  // ← Only add if you have real UUIDs
-    };
+    setSubmitting(true);
+    const loadingToast = toast.loading(editingId ? "Updating product..." : "Creating product...");
+    
+    try {
+      // Step 1: Create/Update product (PascalCase for backend)
+      const productData = {
+        Name: form.name.trim(),
+        Description: form.description.trim(),
+        Price: Number(form.price),
+        StockQuantity: Number(form.stockQuantity),
+        CategoryId: form.categoryId,
+        IsAvailable: form.isAvailable,
+      };
 
-    if (editingId) {
-      // For UPDATE — depends on your update endpoint format
-      await productsAPI.update(editingId, textParams);
-      
-      // Then upload images separately
+      console.log("📝 Saving product:", productData);
+
+      let productId;
+      if (editingId) {
+        await productsAPI.update(editingId, productData);
+        productId = editingId;
+        console.log("✅ Product updated:", productId);
+      } else {
+        const response = await productsAPI.create(productData);
+        productId = response.data?.id || response.data?.data?.id;
+        console.log("✅ Product created:", productId);
+      }
+
+      // Step 2: Upload images if any new files selected
       const hasNewImages = form.frontImage instanceof File 
         || form.backImage instanceof File 
         || form.sideImage instanceof File;
       
-      if (hasNewImages) {
+      if (hasNewImages && productId) {
+        toast.dismiss(loadingToast);
+        const uploadToast = toast.loading("Uploading images...");
+        
+        console.log("🖼️ Uploading images...");
         const imgData = new FormData();
         if (form.frontImage instanceof File) imgData.append("FrontImage", form.frontImage);
         if (form.backImage instanceof File) imgData.append("BackImage", form.backImage);
         if (form.sideImage instanceof File) imgData.append("SideImage", form.sideImage);
-        await productsAPI.updateImages(editingId, imgData);
+        
+        await productsAPI.uploadImages(productId, imgData);
+        console.log("✅ Images uploaded!");
+        toast.dismiss(uploadToast);
+      } else {
+        toast.dismiss(loadingToast);
       }
-      
-      toast.success("Product updated! ✨");
-    } else {
-      // For CREATE — images in body, text in query
-      const imageData = new FormData();
-      if (form.frontImage instanceof File) imageData.append("FrontImage", form.frontImage);
-      if (form.backImage instanceof File) imageData.append("BackImage", form.backImage);
-      if (form.sideImage instanceof File) imageData.append("SideImage", form.sideImage);
-      
-      await productsAPI.create(textParams, imageData);
-      toast.success("Product created with image! 🎉");
-    }
 
-    setForm(EMPTY_FORM);
-    setEditingId(null);
-    setShowForm(false);
-    fetchProducts();
-  } catch (err) {
-    console.error("Save error:", err.response?.data);
-    const msg = err.response?.data?.message
-      || err.response?.data?.title
-      || err.response?.data?.detail
-      || "Failed to save product";
-    toast.error(typeof msg === "string" ? msg : "Failed to save product");
-  } finally {
-    setSubmitting(false);
-  }
-};
+      toast.success(editingId ? "Product updated! ✨" : "Product created! 🎉");
+
+setForm(EMPTY_FORM);
+setEditingId(null);
+setShowForm(false);
+
+// Small delay to ensure backend has committed the write
+await new Promise(resolve => setTimeout(resolve, 500));
+await fetchProducts();
+    } catch (err) {
+      toast.dismiss(loadingToast);
+      console.error("❌ Save error:", err.response?.data || err);
+      const msg = err.response?.data?.message
+        || err.response?.data?.title
+        || err.response?.data?.detail
+        || err.message
+        || "Failed to save product";
+      toast.error(typeof msg === "string" ? msg : "Failed to save product");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   const handleEdit = (product) => {
+  // Backend returns category ID in 'category' field
+  const productCategoryId = product.categoryId || product.category;
+  const matchingCategory = categories.find(c => c.id === productCategoryId);
+  
   setForm({
     name: product.name || "",
     description: product.description || "",
-    price: product.originalPrice || product.finalPrice || "",
+    price: product.originalPrice || product.finalPrice || product.price || "",
     stockQuantity: product.stockQuantity || "",
-    categoryId: product.category || product.categoryId || "",
+    categoryId: matchingCategory?.id || productCategoryId || "",
     isAvailable: product.isAvailable !== false,
-    // Store URLs for preview only — NOT for uploading
     frontImage: product.frontImageUrl || null,
     backImage: product.backImageUrl || null,
     sideImage: product.sideImageUrl || null,
-    // Keep track of existing URLs separately
-    _existingFrontUrl: product.frontImageUrl || null,
-    _existingBackUrl: product.backImageUrl || null,
-    _existingSideUrl: product.sideImageUrl || null,
   });
   setEditingId(product.id);
   setShowForm(true);
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
-
   const handleDelete = async (id, name) => {
-    if (!window.confirm(`Are you sure you want to delete "${name}"?`)) return;
-    
-    try {
-      await productsAPI.delete(id);
-      toast.success("Product deleted");
-      fetchProducts();
-    } catch (err) {
-      toast.error("Failed to delete product");
-    }
-  };
+  // Custom toast confirmation (no ugly browser popup!)
+  toast((t) => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px", padding: "4px" }}>
+      <div>
+        <strong style={{ fontSize: "15px" }}>Delete "{name}"?</strong>
+        <p style={{ margin: "4px 0 0", fontSize: "13px", color: "#666" }}>
+          This action cannot be undone.
+        </p>
+      </div>
+      <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
+        <button
+          onClick={() => toast.dismiss(t.id)}
+          style={{
+            padding: "6px 14px",
+            border: "1px solid #ddd",
+            background: "white",
+            borderRadius: "6px",
+            cursor: "pointer",
+            fontSize: "13px",
+          }}
+        >
+          Cancel
+        </button>
+        <button
+          onClick={async () => {
+            toast.dismiss(t.id);
+            
+            // Optimistic update - remove immediately from UI
+            setProducts(prev => prev.filter(p => p.id !== id));
+            const deleteToast = toast.loading(`Deleting "${name}"...`);
+            
+            try {
+              await productsAPI.delete(id);
+              toast.dismiss(deleteToast);
+              toast.success(`"${name}" deleted`);
+            } catch (err) {
+              toast.dismiss(deleteToast);
+              console.error("Delete error:", err.response?.data);
+              // Revert if failed - restore product to list
+              fetchProducts();
+              const msg = err.response?.data?.detail || "Failed to delete";
+              toast.error(msg);
+            }
+          }}
+          style={{
+            padding: "6px 14px",
+            border: "none",
+            background: "#dc3545",
+            color: "white",
+            borderRadius: "6px",
+            cursor: "pointer",
+            fontSize: "13px",
+            fontWeight: "600",
+          }}
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  ), { duration: 10000 }); // Auto-dismiss after 10 seconds
+};
 
   const handleCancel = () => {
     setForm(EMPTY_FORM);
@@ -215,7 +279,6 @@ export default function AdminProducts() {
     setErrors({});
   };
 
-  // Helper: Get preview URL from File or existing URL string
   const getPreviewUrl = (fileOrUrl) => {
     if (!fileOrUrl) return null;
     if (fileOrUrl instanceof File) return URL.createObjectURL(fileOrUrl);
@@ -223,7 +286,14 @@ export default function AdminProducts() {
     return null;
   };
 
-  // Reusable file upload component
+  // Helper: Get category name from ID
+  const getCategoryName = (product) => {
+  // Backend returns categoryId in 'category' field
+  const categoryId = product.categoryId || product.category;
+  const cat = categories.find(c => c.id === categoryId);
+  return cat?.name || "—";
+};
+
   const FileUploader = ({ name, label, required, fileRef, error }) => {
     const file = form[name];
     const previewUrl = getPreviewUrl(file);
@@ -292,13 +362,24 @@ export default function AdminProducts() {
   return (
     <div className="nl-admin-page">
       <div className="container">
-        {/* Page Header with Add Button */}
-<div className="nl-admin-header">
-  <div>
-    <h1 className="nl-admin-title">Products</h1>
-    <p className="nl-admin-subtitle">Manage your store's product catalog</p>
-  </div>
-  {!showForm && (
+        <div className="nl-admin-header">
+          <div>
+            <h1 className="nl-admin-title">Products</h1>
+            <p className="nl-admin-subtitle">Manage your store's product catalog</p>
+          </div>
+          {!showForm && (
+  <div style={{ display: "flex", gap: "8px" }}>
+    <button 
+      className="btn nl-btn-outline" 
+      onClick={fetchProducts}
+      title="Refresh"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="18" height="18">
+        <polyline points="23 4 23 10 17 10"/>
+        <polyline points="1 20 1 14 7 14"/>
+        <path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/>
+      </svg>
+    </button>
     <button 
       className="btn nl-btn" 
       onClick={() => setShowForm(true)}
@@ -309,9 +390,10 @@ export default function AdminProducts() {
       </svg>
       Add New Product
     </button>
-  )}
-</div>
-        {/* Stats Cards */}
+  </div>
+)}
+        </div>
+
         <div className="nl-admin-stats">
           <div className="nl-stat-card">
             <div className="nl-stat-card__icon">
@@ -371,7 +453,6 @@ export default function AdminProducts() {
           </div>
         </div>
 
-        {/* Add/Edit Form */}
         {showForm && (
           <div className="nl-admin-form-card">
             <div className="nl-admin-form-head">
@@ -386,7 +467,6 @@ export default function AdminProducts() {
 
             <form onSubmit={handleSubmit}>
               <div className="row g-3">
-                {/* Name */}
                 <div className="col-12 col-md-8">
                   <label className="nl-form-label">Product Name *</label>
                   <input
@@ -400,7 +480,6 @@ export default function AdminProducts() {
                   {errors.name && <span className="nl-form-error">{errors.name}</span>}
                 </div>
 
-                {/* Category */}
                 <div className="col-12 col-md-4">
                   <label className="nl-form-label">Category *</label>
                   <select
@@ -410,14 +489,16 @@ export default function AdminProducts() {
                     className={`nl-form-input ${errors.categoryId ? 'error' : ''}`}
                   >
                     <option value="">Select category</option>
-                    {CATEGORIES.map(c => (
+                    {categories.map(c => (
                       <option key={c.id} value={c.id}>{c.name}</option>
                     ))}
                   </select>
                   {errors.categoryId && <span className="nl-form-error">{errors.categoryId}</span>}
+                  {categories.length === 0 && (
+                    <small style={{ color: "#c00" }}>⚠️ No categories loaded</small>
+                  )}
                 </div>
 
-                {/* Description */}
                 <div className="col-12">
                   <label className="nl-form-label">Description *</label>
                   <textarea
@@ -431,7 +512,6 @@ export default function AdminProducts() {
                   {errors.description && <span className="nl-form-error">{errors.description}</span>}
                 </div>
 
-                {/* Price */}
                 <div className="col-12 col-md-4">
                   <label className="nl-form-label">Price (₦) *</label>
                   <input
@@ -447,7 +527,6 @@ export default function AdminProducts() {
                   {errors.price && <span className="nl-form-error">{errors.price}</span>}
                 </div>
 
-                {/* Stock */}
                 <div className="col-12 col-md-4">
                   <label className="nl-form-label">Stock Quantity *</label>
                   <input
@@ -462,7 +541,6 @@ export default function AdminProducts() {
                   {errors.stockQuantity && <span className="nl-form-error">{errors.stockQuantity}</span>}
                 </div>
 
-                {/* Available toggle */}
                 <div className="col-12 col-md-4 d-flex align-items-end">
                   <label className="nl-toggle">
                     <input
@@ -478,7 +556,6 @@ export default function AdminProducts() {
                   </label>
                 </div>
 
-                {/* IMAGES SECTION */}
                 <div className="col-12">
                   <h3 className="nl-form-section-title">Product Images</h3>
                   <p className="nl-form-hint">
@@ -530,7 +607,6 @@ export default function AdminProducts() {
           </div>
         )}
 
-        {/* Products Table */}
         <div className="nl-admin-products">
           <h2 className="nl-admin-products__title">All Products</h2>
 
@@ -565,7 +641,7 @@ export default function AdminProducts() {
                     <div className="nl-admin-row__name">{product.name}</div>
                     <div className="nl-admin-row__desc">{product.description}</div>
                   </div>
-                  <div>{product.category || "—"}</div>
+                  <div>{getCategoryName(product)}</div>
                   <div className="nl-admin-row__price">
                     ₦{Number(product.finalPrice || product.originalPrice || 0).toLocaleString()}
                   </div>
